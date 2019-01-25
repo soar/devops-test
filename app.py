@@ -1,3 +1,4 @@
+import ipaddress
 import logging
 import os
 import pathlib
@@ -49,11 +50,23 @@ def index():
         try:
             data['db_version'] = db.engine.execute("SELECT version();").fetchone()[0]
 
-            visitor = Visitor.query.filter_by(ip=request.remote_addr).first()
+            user_ip = 'n/a'
+            try:
+                x_forwarded_addrs = request.headers.getlist("x-forwarded-for")
+                if x_forwarded_addrs:
+                    user_ip = str(ipaddress.ip_address(x_forwarded_addrs[0]))
+                else:
+                    user_ip = request.remote_addr
+            except ValueError as ex:
+                logger.exception(f"Wrong IP address detected: {ex}")
+
+            data['user_ip'] = user_ip
+
+            visitor = Visitor.query.filter_by(ip=user_ip).first()
             if visitor:
                 visitor.visits += 1
             else:
-                visitor = Visitor(ip=request.remote_addr, visits=1)
+                visitor = Visitor(ip=user_ip, visits=1)
 
             db.session.add(visitor)
             db.session.commit()
