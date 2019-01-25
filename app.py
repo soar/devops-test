@@ -6,9 +6,6 @@ from flask import Flask, jsonify, render_template, request
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
-import giphy_client
-import giphy_client.rest
-
 
 APP_DEBUG = bool(int(os.getenv('APP_DEBUG', 0)))
 APP_VERSION = os.getenv('APP_VERSION', pathlib.Path('version.txt').read_text().strip())
@@ -18,8 +15,6 @@ USER_NAME = os.getenv('USER_NAME', 'n/a')
 USER_URL = os.getenv('USER_URL', '#')
 
 DATABASE_URL = os.getenv('DATABASE_URL', '')
-
-GIPHY_API_KEY = os.getenv('GIPHY_API_KEY')
 
 app = Flask(__name__)
 app.config.update({
@@ -70,14 +65,6 @@ def index():
         except Exception as ex:
             logger.exception(f"Query to DB failed: {ex}")
             data['message'] = "Query to DB failed"
-
-    if GIPHY_API_KEY:
-        try:
-            giphy = giphy_client.DefaultApi()
-            gif: giphy_client.RandomGif = giphy.gifs_random_get(GIPHY_API_KEY).data
-            data['gif_url'] = gif.image_url
-        except giphy_client.rest.ApiException as ex:
-            logger.exception(f"Can't get gif image: {ex}")
 
     return render_template('page.html', **data)
 

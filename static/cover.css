@@ -116,6 +116,6 @@ body {
 }
 
 pre {
-  overflow: visible;
+  overflow: hidden;
   font-size: small;
 }
