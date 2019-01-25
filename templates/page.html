@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="DevOps Test Task by @soar">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="{{ app_name }}">
+    <title>DevOps Test Task by soar · Deployed by {{ user_name }}</title>
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="{{ url_for('static', filename='cover.css') }}" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">DevOps Test Task v{{ app_version }}</h3>
+          <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link" href="http://pages.soar.name/devops-test/" target="_blank">Info</a>
+          </nav>
+        </div>
+      </header>
+
+      <main role="main" class="inner cover">
+        <h1 class="cover-heading">Hello!</h1>
+        <p class="lead">
+          {{ message }}
+        </p>
+        <p>
+          {% if db_version %}
+            <pre><code>{{ db_version}}</code></pre>
+          {% endif %}
+        </p>
+        <p>
+          {% if gif_url %}
+            <img alt="Giphy Gif" src="{{ gif_url }}" class="img-thumbnail" />
+          {% else %}
+            Sorry, there is no gif for you :-(
+          {% endif %}
+        </p>
+        <p class="lead">
+          <a href="http://pages.soar.name/devops-test/" class="btn btn-lg btn-secondary">Learn more</a>
+        </p>
+      </main>
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>DevOps Test Task by <a href="https://soar.name">@soar</a> · Deployed by <a href="{{ user_url }}" target="_blank"><b>{{ user_name }}</b></a></p>
+          <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.</p>
+        </div>
+      </footer>
+</div>
+</body>
+</html>

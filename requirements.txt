@@ -1,0 +1,7 @@
+flask >= 1.0, < 1.1
+flask_migrate >= 2.3, < 2.4
+flask_sqlalchemy >= 2.3, < 2.4
+giphy_client >= 1.0, < 1.1
+psycopg2-binary >= 2.7, < 2.8
+
+gunicorn
