@@ -7,9 +7,11 @@ from flask import Flask, jsonify, render_template, request, wrappers
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
+from helpers.version import get_project_version
+
 
 APP_DEBUG = bool(int(os.getenv('APP_DEBUG', 0)))
-APP_VERSION = os.getenv('APP_VERSION', pathlib.Path('version.txt').read_text().strip())
+APP_VERSION = os.getenv('APP_VERSION', get_project_version())
 APP_NAME = os.getenv('APP_NAME', f'devops-test-v{APP_VERSION}')
 
 USER_NAME = os.getenv('USER_NAME', 'n/a')
@@ -84,8 +86,7 @@ def index() -> wrappers.Response:
 
 @app.route("/version")
 def version() -> wrappers.Response:
-    v = pathlib.Path('version.txt').read_text().strip()
-    return jsonify({'version': v})
+    return jsonify({'version': get_project_version()})
 
 
 if __name__ == '__main__':

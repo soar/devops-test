@@ -1,9 +1,11 @@
 from distutils.core import setup
 from pathlib import Path
 
+from helpers.version import get_project_version
+
 setup(
     name='devops-test',
-    version=Path('version.txt').read_text().strip(),
+    version=get_project_version(),
     packages=[''],
     url='https://soar.name',
     license='GNU GPLv3 ',
