@@ -1,3 +1,6 @@
+.mypy_cache/
+.pytest_cache/
+
 ISSUES.md
 NOTES.md
 

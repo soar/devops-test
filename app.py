@@ -3,7 +3,7 @@ import logging
 import os
 import pathlib
 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, wrappers
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
@@ -28,14 +28,14 @@ migrate = Migrate(app, db)
 logger = logging.getLogger(__name__)
 
 
-class Visitor(db.Model):
+class Visitor(db.Model):  # type: ignore
     id = db.Column(db.Integer, primary_key=True)
     ip = db.Column(db.String(40), index=True, unique=True)
     visits = db.Column(db.Integer)
 
 
 @app.route("/")
-def index():
+def index() -> wrappers.Response:
     data = {
         'app_name': APP_NAME,
         'app_version': APP_VERSION,
@@ -83,7 +83,7 @@ def index():
 
 
 @app.route("/version")
-def version():
+def version() -> wrappers.Response:
     v = pathlib.Path('version.txt').read_text().strip()
     return jsonify({'version': v})
 
