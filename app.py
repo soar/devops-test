@@ -1,7 +1,6 @@
 import ipaddress
 import logging
 import os
-import pathlib
 
 from flask import Flask, jsonify, render_template, request, wrappers
 from flask_migrate import Migrate
@@ -36,7 +35,7 @@ class Visitor(db.Model):  # type: ignore
     visits = db.Column(db.Integer)
 
 
-@app.route("/")
+@app.route('/')
 def index() -> wrappers.Response:
     data = {
         'app_name': APP_NAME,
@@ -47,20 +46,20 @@ def index() -> wrappers.Response:
     }
 
     if not DATABASE_URL:
-        data['message'] = "Database is not configured"
+        data['message'] = 'Database is not configured'
     else:
         try:
-            data['db_version'] = db.engine.execute("SELECT version();").fetchone()[0]
+            data['db_version'] = db.engine.execute('SELECT version();').fetchone()[0]
 
             user_ip = 'n/a'
             try:
-                x_forwarded_addrs = request.headers.getlist("x-forwarded-for")
+                x_forwarded_addrs = request.headers.getlist('x-forwarded-for')
                 if x_forwarded_addrs:
                     user_ip = str(ipaddress.ip_address(x_forwarded_addrs[0]))
                 else:
                     user_ip = request.remote_addr
             except ValueError as ex:
-                logger.exception(f"Wrong IP address detected: {ex}")
+                logger.exception(f'Wrong IP address detected: {ex}')
 
             data['user_ip'] = user_ip
 
@@ -73,18 +72,18 @@ def index() -> wrappers.Response:
             db.session.add(visitor)
             db.session.commit()
 
-            data['message'] = "You have visited this page {visited!s} times. Total visitors: {total!s}".format(
+            data['message'] = 'You have visited this page {visited!s} times. Total visitors: {total!s}'.format(
                 visited=visitor.visits,
                 total=Visitor.query.count(),
             )
         except Exception as ex:
-            logger.exception(f"Query to DB failed: {ex}")
-            data['message'] = "Query to DB failed"
+            logger.exception(f'Query to DB failed: {ex}')
+            data['message'] = 'Query to DB failed'
 
     return render_template('page.html', **data)
 
 
-@app.route("/version")
+@app.route('/version')
 def version() -> wrappers.Response:
     return jsonify({'version': get_project_version()})
 

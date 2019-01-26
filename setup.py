@@ -1,5 +1,4 @@
 from distutils.core import setup
-from pathlib import Path
 
 from helpers.version import get_project_version
 
