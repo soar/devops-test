@@ -2,12 +2,17 @@ import ipaddress
 import logging
 import os
 
+from dotenv import find_dotenv, load_dotenv
 from flask import Flask, jsonify, make_response, render_template, request, wrappers
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 from helpers.version import get_project_version
 
+
+dotenv_file = find_dotenv(usecwd=True)
+if dotenv_file:
+    load_dotenv(dotenv_file, verbose=True)
 
 APP_DEBUG = bool(int(os.getenv('APP_DEBUG', 0)))
 APP_VERSION = os.getenv('APP_VERSION', get_project_version())
