@@ -1,6 +1,8 @@
-flask >= 1.0, < 1.1
-flask_migrate >= 2.3, < 2.4
-flask_sqlalchemy >= 2.3, < 2.4
-psycopg2-binary >= 2.7, < 2.8
+cryptography ~= 38.0.1
+flask ~= 2.2.2
+flask-migrate ~= 3.1.0
+flask-sqlalchemy ~= 2.5.1
+psycopg2-binary ~= 2.9.3
+pymysql ~= 1.0.2
 
-gunicorn
+gunicorn ~= 20.1.0

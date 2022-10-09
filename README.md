@@ -28,7 +28,7 @@ But this task is not about programming, so if you don't know Python and are skil
 Requirements:
 
 - Python `3.6` (any other `3.x` should work too)
-- PostgreSQL server
+- PostgreSQL or MySQL server
 - Packages listed in `requirements.txt` 
 
 All this App does - counts unique visitors and shows this statistic. All it needs is a running database. 

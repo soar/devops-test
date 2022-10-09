@@ -2,7 +2,7 @@ import ipaddress
 import logging
 import os
 
-from flask import Flask, jsonify, render_template, request, wrappers
+from flask import Flask, jsonify, make_response, render_template, request, wrappers
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
@@ -80,7 +80,7 @@ def index() -> wrappers.Response:
             logger.exception(f'Query to DB failed: {ex}')
             data['message'] = 'Query to DB failed'
 
-    return render_template('page.html', **data)
+    return make_response(render_template('page.html', **data))
 
 
 @app.route('/version')
