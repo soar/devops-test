@@ -177,7 +177,7 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 Inter
 
 [license]: http://creativecommons.org/licenses/by-sa/4.0/
 
-[demo]: https://soars-devops-test.herokuapp.com
+[demo]: https://devopstesttask.pythonanywhere.com/
 
 [ansible]: https://www.ansible.com
 [aws]: https://aws.amazon.com
